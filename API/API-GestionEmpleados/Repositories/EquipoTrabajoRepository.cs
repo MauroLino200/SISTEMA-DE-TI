@@ -71,12 +71,5 @@ namespace API_GestionEmpleados.Repositories
             return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
         }
 
-        public async Task<EquipoTrabajoResponse> ObtenerPorNombreAsync(string nom_equipo)
-        {
-            var sp = "USP_GET_EQUIPOS_BY_NAME";
-            var parameters = new DynamicParameters();
-            parameters.Add("@NombreEquipo", nom_equipo, DbType.String);
-            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
-        }
     }
 }
