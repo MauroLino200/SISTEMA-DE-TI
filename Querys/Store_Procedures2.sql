@@ -172,9 +172,6 @@ GO
 
 -- equipos reserva --
 
-
-
-
 CREATE OR ALTER PROC USP_GET_ALL_RESERVAS
 AS
 BEGIN
@@ -198,6 +195,151 @@ END
 GO
 
 exec dbo.USP_GET_ALL_RESERVAS
+
+
+-- Filtrado Reservas 
+
+CREATE OR ALTER PROC USP_GET_ONE_RESERVA_BY_ITS_ID
+ @IdReserva int
+
+AS
+BEGIN
+		
+		SELECT
+		IdReserva   = RE.IdReserva,
+        IdEquipo    = EQT.IdEquipo,
+		NombreEquipo = EQT.NombreEquipo,
+        IdModelo     = EQT.IdModelo, 
+        TipoEquipo   = EQT.TipoEquipo,
+        Marca        = EQT.Marca,
+		IdEmpleado = EMP.IdEmpleado,
+		NombreEmpleado = EMP.NombreCompleto,
+		IdCargo = EMP.IdCargo,
+		IdDepartamento = EMP.IdDepartamento,
+        FechaReserva = RE.FechaReserva
+		FROM dbo.TblReservasEquipos RE
+		inner join TblEquipoTrabajo EQT ON RE.IdEquipo = EQT.IdEquipo  
+		inner join TblEmpleado EMP ON RE.IdEmpleado = EMP.IdEmpleado 
+		where RE.IdReserva = @IdReserva
+END
+GO
+
+exec dbo.USP_GET_ONE_RESERVA_BY_ITS_ID 2
+
+
+CREATE OR ALTER PROC USP_GET_ONE_RESERVA_BY_ITS_NAME
+ @NombreEquipo VARCHAR(100)
+
+AS
+BEGIN
+		
+		SELECT
+		IdReserva   = RE.IdReserva,
+        IdEquipo    = EQT.IdEquipo,
+		NombreEquipo = EQT.NombreEquipo,
+        IdModelo     = EQT.IdModelo, 
+        TipoEquipo   = EQT.TipoEquipo,
+        Marca        = EQT.Marca,
+		IdEmpleado = EMP.IdEmpleado,
+		NombreEmpleado = EMP.NombreCompleto,
+		IdCargo = EMP.IdCargo,
+		IdDepartamento = EMP.IdDepartamento,
+        FechaReserva = RE.FechaReserva
+		FROM dbo.TblReservasEquipos RE
+		inner join TblEquipoTrabajo EQT ON RE.IdEquipo = EQT.IdEquipo  
+		inner join TblEmpleado EMP ON RE.IdEmpleado = EMP.IdEmpleado 
+		where EQT.NombreEquipo = @NombreEquipo
+END
+GO
+
+exec dbo.USP_GET_ONE_RESERVA_BY_ITS_NAME ''  
+
+
+CREATE OR ALTER PROC USP_GET_ONE_RESERVA_BY_ITS_TYPE_OF_THING
+ @IdModelo int
+
+AS
+BEGIN
+		
+		SELECT
+		IdReserva   = RE.IdReserva,
+        IdEquipo    = EQT.IdEquipo,
+		NombreEquipo = EQT.NombreEquipo,
+        IdModelo     = EQT.IdModelo, 
+        TipoEquipo   = EQT.TipoEquipo,
+        Marca        = EQT.Marca,
+		IdEmpleado = EMP.IdEmpleado,
+		NombreEmpleado = EMP.NombreCompleto,
+		IdCargo = EMP.IdCargo,
+		IdDepartamento = EMP.IdDepartamento,
+        FechaReserva = RE.FechaReserva
+		FROM dbo.TblReservasEquipos RE
+		inner join TblEquipoTrabajo EQT ON RE.IdEquipo = EQT.IdEquipo  
+		inner join TblEmpleado EMP ON RE.IdEmpleado = EMP.IdEmpleado 
+		where EQT.IdModelo = @IdModelo
+END
+GO
+
+exec dbo.USP_GET_ONE_RESERVA_BY_ITS_ID 2
+
+
+CREATE OR ALTER PROC USP_GET_ONE_RESERVA_BY_ID_OF_EMPLOYEE
+ @IdEmpleado int
+
+AS
+BEGIN
+		
+		SELECT
+		IdReserva   = RE.IdReserva,
+        IdEquipo    = EQT.IdEquipo,
+		NombreEquipo = EQT.NombreEquipo,
+        IdModelo     = EQT.IdModelo, 
+        TipoEquipo   = EQT.TipoEquipo,
+        Marca        = EQT.Marca,
+		IdEmpleado = EMP.IdEmpleado,
+		NombreEmpleado = EMP.NombreCompleto,
+		IdCargo = EMP.IdCargo,
+		IdDepartamento = EMP.IdDepartamento,
+        FechaReserva = RE.FechaReserva
+		FROM dbo.TblReservasEquipos RE
+		inner join TblEquipoTrabajo EQT ON RE.IdEquipo = EQT.IdEquipo  
+		inner join TblEmpleado EMP ON RE.IdEmpleado = EMP.IdEmpleado 
+		where EMP.IdEmpleado = @IdEmpleado
+END
+GO
+
+exec dbo.USP_GET_ONE_RESERVA_BY_ID_OF_EMPLOYEE 1
+
+
+CREATE OR ALTER PROC USP_GET_ONE_RESERVA_BY_ITS_DATE
+ @FechaReserva DATETIME
+
+AS
+BEGIN
+		
+		SELECT
+		IdReserva   = RE.IdReserva,
+        IdEquipo    = EQT.IdEquipo,
+		NombreEquipo = EQT.NombreEquipo,
+        IdModelo     = EQT.IdModelo, 
+        TipoEquipo   = EQT.TipoEquipo,
+        Marca        = EQT.Marca,
+		IdEmpleado = EMP.IdEmpleado,
+		NombreEmpleado = EMP.NombreCompleto,
+		IdCargo = EMP.IdCargo,
+		IdDepartamento = EMP.IdDepartamento,
+        FechaReserva = RE.FechaReserva
+		FROM dbo.TblReservasEquipos RE
+		inner join TblEquipoTrabajo EQT ON RE.IdEquipo = EQT.IdEquipo  
+		inner join TblEmpleado EMP ON RE.IdEmpleado = EMP.IdEmpleado 
+		where RE.FechaReserva = @FechaReserva
+END
+GO
+
+select * from dbo.TblReservasEquipos
+
+
+exec USP_GET_ONE_RESERVA_BY_ITS_DATE '2025-08-18 21:01:36.413'
 
 
 
@@ -312,14 +454,14 @@ CREATE OR ALTER PROC USP_GET_ALL_DEVOLUCIONES
 AS
 BEGIN
     SELECT
-        IdDevolucion   = DE.IdDevolucion,
-        IdEquipo       = EQT.IdEquipo,
-        NombreEquipo   = EQT.NombreEquipo,
-        IdModelo       = EQT.IdModelo,
-        TipoEquipo     = EQT.TipoEquipo,
-        Marca          = EQT.Marca,
-        IdEmpleado     = RE.IdEmpleado,
-        FechaDevolucion = DE.FechaDevolucion
+        DE.IdDevolucion,
+        EQT.IdEquipo,
+        EQT.NombreEquipo,
+        EQT.IdModelo,
+        EQT.TipoEquipo,
+        EQT.Marca,
+        RE.IdEmpleado,
+        DE.FechaDevolucion
     FROM dbo.TblDevolucionesEquipos DE
     INNER JOIN TblReservasEquipos RE 
         ON DE.IdReserva = RE.IdReserva
@@ -330,6 +472,133 @@ GO
 
 
 exec dbo.USP_GET_ALL_DEVOLUCIONES
+
+
+-- filtrados devoluciones
+
+CREATE OR ALTER PROC USP_GET_ONE_DEVOLUCION_BY_ITS_ID
+@IdDevolucion int
+AS
+BEGIN
+    SELECT
+         DE.IdDevolucion,
+       EQT.IdEquipo,
+       EQT.NombreEquipo,
+    EQT.IdModelo,
+        EQT.TipoEquipo,
+      EQT.Marca,
+		RE.IdEmpleado,
+       DE.FechaDevolucion
+    FROM dbo.TblDevolucionesEquipos DE
+    INNER JOIN TblReservasEquipos RE 
+        ON DE.IdReserva = RE.IdReserva
+    INNER JOIN TblEquipoTrabajo EQT 
+        ON RE.IdEquipo = EQT.IdEquipo
+		WHERE DE.IdDevolucion = @IdDevolucion
+END
+GO
+
+exec dbo.USP_GET_ONE_DEVOLUCION_BY_ITS_ID 1
+
+
+CREATE OR ALTER PROC USP_GET_ONE_DEVOLUCION_BY_ITS_NAME
+@NombreEquipo VARCHAR(100)
+AS
+BEGIN
+    SELECT
+         DE.IdDevolucion,
+       EQT.IdEquipo,
+       EQT.NombreEquipo,
+    EQT.IdModelo,
+        EQT.TipoEquipo,
+      EQT.Marca,
+		RE.IdEmpleado,
+       DE.FechaDevolucion
+    FROM dbo.TblDevolucionesEquipos DE
+    INNER JOIN TblReservasEquipos RE 
+        ON DE.IdReserva = RE.IdReserva
+    INNER JOIN TblEquipoTrabajo EQT 
+        ON RE.IdEquipo = EQT.IdEquipo
+		WHERE EQT.NombreEquipo = @NombreEquipo
+END
+GO
+
+exec dbo.USP_GET_ONE_DEVOLUCION_BY_ITS_NAME 'Mouse Logitech M330 - SN321'
+
+
+CREATE OR ALTER PROC USP_GET_ONE_DEVOLUCION_BY_ITS_TYPE
+@IdModelo int
+AS
+BEGIN
+    SELECT
+         DE.IdDevolucion,
+       EQT.IdEquipo,
+       EQT.NombreEquipo,
+    EQT.IdModelo,
+        EQT.TipoEquipo,
+      EQT.Marca,
+		RE.IdEmpleado,
+       DE.FechaDevolucion
+    FROM dbo.TblDevolucionesEquipos DE
+    INNER JOIN TblReservasEquipos RE 
+        ON DE.IdReserva = RE.IdReserva
+    INNER JOIN TblEquipoTrabajo EQT 
+        ON RE.IdEquipo = EQT.IdEquipo
+		WHERE EQT.IdModelo = @IdModelo
+END
+GO
+
+exec dbo.USP_GET_ONE_DEVOLUCION_BY_ITS_TYPE 1
+
+
+CREATE OR ALTER PROC USP_GET_ONE_DEVOLUCION_BY_ID_EMPLOYEE
+@IdEmpleado int
+AS
+BEGIN
+    SELECT
+         DE.IdDevolucion,
+       EQT.IdEquipo,
+       EQT.NombreEquipo,
+    EQT.IdModelo,
+        EQT.TipoEquipo,
+      EQT.Marca,
+		RE.IdEmpleado,
+       DE.FechaDevolucion
+    FROM dbo.TblDevolucionesEquipos DE
+    INNER JOIN TblReservasEquipos RE 
+        ON DE.IdReserva = RE.IdReserva
+    INNER JOIN TblEquipoTrabajo EQT 
+        ON RE.IdEquipo = EQT.IdEquipo
+		WHERE RE.IdEmpleado = @IdEmpleado
+END
+GO
+
+exec dbo.USP_GET_ONE_DEVOLUCION_BY_ID_EMPLOYEE 1
+
+
+CREATE OR ALTER PROC USP_GET_ONE_DEVOLUCION_BY_DATE
+@FechaDevolucion DATETIME
+AS
+BEGIN
+    SELECT
+         DE.IdDevolucion,
+       EQT.IdEquipo,
+       EQT.NombreEquipo,
+    EQT.IdModelo,
+        EQT.TipoEquipo,
+      EQT.Marca,
+		RE.IdEmpleado,
+       DE.FechaDevolucion
+    FROM dbo.TblDevolucionesEquipos DE
+    INNER JOIN TblReservasEquipos RE 
+        ON DE.IdReserva = RE.IdReserva
+    INNER JOIN TblEquipoTrabajo EQT 
+        ON RE.IdEquipo = EQT.IdEquipo
+		WHERE DE.FechaDevolucion = @FechaDevolucion
+END
+GO
+
+exec dbo.USP_GET_ONE_DEVOLUCION_BY_DATE '2025-08-21 15:29:21.607'
 
 
 
@@ -384,14 +653,6 @@ END
 GO
 
 
-
-
-
-
-
-
-
-
 -- equipos filtrado ---
 CREATE OR ALTER PROCEDURE USP_GET_ONE_EQUIPO_BY_ID
 @IdEquipo int
@@ -401,7 +662,7 @@ BEGIN
 		SELECT
 		EQT.IdEquipo,
 		EQT.NombreEquipo,
-		EQM.IdModelo AS IdModeloEquipo,
+		EQM.IdModelo,
 		EQM.TipoEquipo,
 		EQM.Marca,
 		EQT.Estado,
@@ -426,7 +687,7 @@ BEGIN
 		SELECT
 		EQT.IdEquipo,
 		EQT.NombreEquipo,
-		EQM.IdModelo AS IdModeloEquipo,
+		EQM.IdModelo,
 		EQM.TipoEquipo,
 		EQM.Marca,
 		EQT.Estado,
@@ -474,7 +735,7 @@ BEGIN
 		SELECT
 		EQT.IdEquipo,
 		EQT.NombreEquipo,
-		EQM.IdModelo AS IdModeloEquipo,
+		EQM.IdModelo,
 		EQM.TipoEquipo,
 		EQM.Marca,
 		EQT.Estado,
@@ -499,7 +760,7 @@ BEGIN
 		SELECT
 		EQT.IdEquipo,
 		EQT.NombreEquipo,
-		EQM.IdModelo AS IdModeloEquipo,
+		EQM.IdModelo,
 		EQM.TipoEquipo,
 		EQM.Marca,
 		EQT.Estado,
@@ -517,8 +778,6 @@ GO
 EXEC dbo.USP_GET_EQUIPOS_BY_DATE '2023-05-05'
 
 
-
-
 -- Empleados
 
 CREATE OR ALTER PROC USP_SELECT_EMPLEADOS
@@ -526,7 +785,8 @@ AS
 BEGIN
     SELECT 
         E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
         E.Turno,
@@ -553,7 +813,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
         E.Turno,
@@ -571,13 +832,14 @@ END
 GO
 
 
-CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_ITS_DNI
- @DNI CHAR(8)
+CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_ITS_NUMBER_OF_DOCUMENT
+ @NumeroDocumento VARCHAR(50)
 AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -593,9 +855,9 @@ BEGIN
     FROM TblEmpleado E
 		INNER JOIN TblCargo C ON E.IdCargo = C.IdCargo
         INNER JOIN TblDepartamento D ON E.IdDepartamento = D.IdDepartamento
-	WHERE E.DNI = @DNI
+	WHERE E.NumeroDocumento = @NumeroDocumento
 END
--- EXEC USP_GET_ONE_EMPLEADO_BY_ITS_DNI 12345678
+-- EXEC USP_GET_ONE_EMPLEADO_BY_ITS_NUMBER_OF_DOCUMENT 12345678
 GO
 
 CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_NAME
@@ -604,7 +866,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -632,7 +895,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -660,7 +924,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -688,7 +953,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -716,7 +982,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -744,7 +1011,8 @@ AS
 BEGIN
 	SELECT 
 		E.IdEmpleado,
-        E.DNI,
+        E.IdTipoDocumento,
+		E.NumeroDocumento,
         E.NombreCompleto,
         E.FechaIngreso,
 		Turno = CASE E.Turno
@@ -766,48 +1034,59 @@ END
 GO
 
 
--- USP_INSERT_EMPLEADO
+-- USP_INSERT_EMPLEADO (actualizado)
 CREATE OR ALTER PROC USP_INSERT_EMPLEADO
-	@DNI CHAR(8),
-	@NombreCompleto VARCHAR(100),
-	@FechaIngreso DATE,
-	@Turno CHAR(1),
-	@Correo VARCHAR(100),
-	@IdCargo INT,
-	@IdDepartamento INT
+    @IdTipoDocumento INT,
+    @NumeroDocumento VARCHAR(20),
+    @NombreCompleto VARCHAR(100),
+    @FechaIngreso DATE,
+    @Turno CHAR(1),
+    @Correo VARCHAR(100),
+    @IdCargo INT,
+    @IdDepartamento INT
 AS
 BEGIN
-	INSERT INTO TblEmpleado (DNI, NombreCompleto, FechaIngreso, Turno, Correo, IdCargo, IdDepartamento)
-	VALUES (@DNI, @NombreCompleto, @FechaIngreso, @Turno, @Correo, @IdCargo, @IdDepartamento)
+    INSERT INTO TblEmpleado 
+    (IdTipoDocumento, NumeroDocumento, NombreCompleto, FechaIngreso, Turno, Correo, IdCargo, IdDepartamento)
+    VALUES 
+    (@IdTipoDocumento, @NumeroDocumento, @NombreCompleto, @FechaIngreso, @Turno, @Correo, @IdCargo, @IdDepartamento)
 END
--- EXEC USP_INSERT_EMPLEADO '87654321', 'Juan Mendoza Vera', '2023-01-01', 'M', 'juan.mendoza@empresa.com', 4, 1
 GO
 
--- USP_UPDATE_EMPLEADO
+-- Ejemplo de ejecución
+-- EXEC USP_INSERT_EMPLEADO 1, '87654321', 'Juan Mendoza Vera', '2023-01-01', 'M', 'juan.mendoza@empresa.com', 4, 1;
+
+
+-- USP_UPDATE_EMPLEADO (actualizado)
 CREATE OR ALTER PROC USP_UPDATE_EMPLEADO
-	@IdEmpleado INT,
-	@DNI CHAR(8),
-	@NombreCompleto VARCHAR(100),
-	@FechaIngreso DATE,
-	@Turno CHAR(1),
-	@Correo VARCHAR(100),
-	@IdCargo INT,
-	@IdDepartamento INT
+    @IdEmpleado INT,
+    @IdTipoDocumento INT,
+    @NumeroDocumento VARCHAR(20),
+    @NombreCompleto VARCHAR(100),
+    @FechaIngreso DATE,
+    @Turno CHAR(1),
+    @Correo VARCHAR(100),
+    @IdCargo INT,
+    @IdDepartamento INT
 AS
 BEGIN
-	UPDATE TblEmpleado
-	SET 
-		DNI = @DNI,
-		NombreCompleto = @NombreCompleto,
-		FechaIngreso = @FechaIngreso,
-		Turno = @Turno,
-		Correo = @Correo,
-		IdCargo = @IdCargo,
-		IdDepartamento = @IdDepartamento
-	WHERE IdEmpleado = @IdEmpleado
+    UPDATE TblEmpleado
+    SET 
+        IdTipoDocumento = @IdTipoDocumento,
+        NumeroDocumento = @NumeroDocumento,
+        NombreCompleto = @NombreCompleto,
+        FechaIngreso = @FechaIngreso,
+        Turno = @Turno,
+        Correo = @Correo,
+        IdCargo = @IdCargo,
+        IdDepartamento = @IdDepartamento
+    WHERE IdEmpleado = @IdEmpleado
 END
--- EXEC USP_UPDATE_EMPLEADO 3, '34567890', 'María G. Salas', '2022-07-15', 'M', 'maria.actualizada@empresa.com', 3, 2
 GO
+
+-- Ejemplo de ejecución
+-- EXEC USP_UPDATE_EMPLEADO 3, 1, '34567890', 'María G. Salas', '2022-07-15', 'M', 'maria.actualizada@empresa.com', 3, 2;
+
 
 -- USP_DELETE_EMPLEADO
 CREATE OR ALTER PROC USP_DELETE_EMPLEADO

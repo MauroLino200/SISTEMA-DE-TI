@@ -47,8 +47,34 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.DevolucionesController",
-    "Method": "GetById",
-    "RelativePath": "api/Devoluciones/{id}",
+    "Method": "GetById_Devoluciones",
+    "RelativePath": "api/Devoluciones/fecha_devolucion/{fecha_devolucion}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fecha_devolucion",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.DevolucionesController",
+    "Method": "GetById_Devoluciones",
+    "RelativePath": "api/Devoluciones/id_devoluciones/{id_devoluciones}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -56,6 +82,89 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id_devoluciones",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.DevolucionesController",
+    "Method": "GetById_Empleado",
+    "RelativePath": "api/Devoluciones/id_empleado/{id_empleado}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_empleado",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.DevolucionesController",
+    "Method": "GetById_Modelo",
+    "RelativePath": "api/Devoluciones/id_modelo/{id_modelo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_modelo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.DevolucionesController",
+    "Method": "GetByNombre_Equipo",
+    "RelativePath": "api/Devoluciones/nombre_equipo/{nombre_equipo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre_equipo",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -259,6 +368,32 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EquipodeTrabajoController",
+    "Method": "GetByDate",
+    "RelativePath": "api/EquipodeTrabajo/date/{fecha}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fecha",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EquipodeTrabajoController",
     "Method": "GetById",
     "RelativePath": "api/EquipodeTrabajo/id/{id}",
     "HttpMethod": "GET",
@@ -293,6 +428,58 @@
     "Parameters": [
       {
         "Name": "nom_equipo",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EquipodeTrabajoController",
+    "Method": "GetByStatus",
+    "RelativePath": "api/EquipodeTrabajo/status/{estado}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "estado",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EquipodeTrabajoController",
+    "Method": "GetByTypeOfThing",
+    "RelativePath": "api/EquipodeTrabajo/type/{tipo_equipo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipo_equipo",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -564,32 +751,6 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
-    "Method": "GetById",
-    "RelativePath": "api/Reserva/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "API_GestionEmpleados.Models.Response.EquiposdeTrabajo.EquipoTrabajoResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
     "Method": "Update",
     "RelativePath": "api/Reserva/{id}",
     "HttpMethod": "PUT",
@@ -624,6 +785,151 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
+    "Method": "GetByDate",
+    "RelativePath": "api/Reserva/date/{fecha_reserva}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fecha_reserva",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
+    "Method": "GetByIdOfEmployee",
+    "RelativePath": "api/Reserva/id_employee/{id_empleado}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_empleado",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
+    "Method": "GetByNameOfModel",
+    "RelativePath": "api/Reserva/id_model/{id_modelo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "modelo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id_modelo",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
+    "Method": "GetById",
+    "RelativePath": "api/Reserva/id_reserva/{id_reserva}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id_reserva",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.ReservaController",
+    "Method": "GetByNameOfThing",
+    "RelativePath": "api/Reserva/name_of_thing/{nombre_equipo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nombre",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "nombre_equipo",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.WeatherForecastController",

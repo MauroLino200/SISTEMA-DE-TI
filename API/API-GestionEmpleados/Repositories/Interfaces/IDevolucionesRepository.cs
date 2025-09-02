@@ -9,9 +9,16 @@ namespace API_GestionEmpleados.Repositories.Interfaces
     {
         Task<IEnumerable<DevolucionesResponse>> ObtenerTodosAsync();
 
+        Task<DevolucionesResponse> ObtenerPorIdDevolucionAsync(int id_devolucion);
+
+        Task<DevolucionesResponse> ObtenerPorNombreEquipoAsync(string nombre_equipo);
+
+        Task<DevolucionesResponse> ObtenerPorIdModeloAsync(int id_modelo);
+
+        Task<DevolucionesResponse> ObtenerPorIdEmpleadoAsync(int id_empleado);
+
+        Task<DevolucionesResponse> ObtenerPorFechaAsync(DateTime fecha_devolucion);
+
         Task<int> InsertarAsync(DevolucionesInsertRequest request);
-
-        Task<DevolucionesResponse> ObtenerPorIdAsync(int id);
-
     }
 }

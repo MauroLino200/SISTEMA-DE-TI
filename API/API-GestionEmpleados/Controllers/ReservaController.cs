@@ -19,6 +19,8 @@ namespace API_GestionEmpleados.Controllers
             _repo = repo;
         }
 
+        #region selection and filters
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReservaResponse>>> GetAll()
         {
@@ -27,13 +29,49 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<EquipoTrabajoResponse>> GetById(int id)
+        [HttpGet("id_reserva/{id_reserva}")]
+        public async Task<ActionResult<ReservaResponse>> GetById(int id)
         {
             var result = await _repo.ObtenerPorIdAsync(id);
             if (result == null) return NotFound();
             return Ok(result);
         }
+
+        [HttpGet("name_of_thing/{nombre_equipo}")]
+        public async Task<ActionResult<ReservaResponse>> GetByNameOfThing(string nombre)
+        {
+            var result = await _repo.ObtenerPorNombreAsync(nombre);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("id_model/{id_modelo}")]
+        public async Task<ActionResult<ReservaResponse>> GetByNameOfModel(int modelo)
+        {
+            var result = await _repo.ObtenerPorModeloAsync(modelo);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("id_employee/{id_empleado}")]
+        public async Task<ActionResult<ReservaResponse>> GetByIdOfEmployee(int id_empleado)
+        {
+            var result = await _repo.ObtenerPorIdEmpleadoAsync(id_empleado);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("date/{fecha_reserva}")]
+        public async Task<ActionResult<ReservaResponse>> GetByDate(DateTime fecha_reserva)
+        {
+            var result = await _repo.ObtenerPorFechaReservaAsync(fecha_reserva);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+        #endregion
+
+
+        #region insert, update, delete
 
         [HttpPost]
         public async Task<ActionResult<int>> Insert([FromBody] ReservaInsertRequest request)
@@ -57,5 +95,9 @@ namespace API_GestionEmpleados.Controllers
             if (!deleted) return NotFound();
             return NoContent();
         }
+
+        #endregion
+
+
     }
 }

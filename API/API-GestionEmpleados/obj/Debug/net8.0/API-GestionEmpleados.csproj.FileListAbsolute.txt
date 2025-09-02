@@ -70,3 +70,4 @@ C:\archivos_de_practica\Proy_Gestion_de_Empleados\API\API-GestionEmpleados\obj\D
 C:\archivos_de_practica\Proy_Gestion_de_Empleados\API\API-GestionEmpleados\obj\Debug\net8.0\API-GestionEmpleados.pdb
 C:\archivos_de_practica\Proy_Gestion_de_Empleados\API\API-GestionEmpleados\obj\Debug\net8.0\API-GestionEmpleados.genruntimeconfig.cache
 C:\archivos_de_practica\Proy_Gestion_de_Empleados\API\API-GestionEmpleados\obj\Debug\net8.0\ref\API-GestionEmpleados.dll
+C:\archivos_de_practica\Proy_Gestion_de_Empleados\API\API-GestionEmpleados\obj\Debug\net8.0\API-GestionEmpleados.sourcelink.json

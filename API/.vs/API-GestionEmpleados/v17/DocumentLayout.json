@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\repositories\\interfaces\\iequipotrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\repositories\\interfaces\\iequipotrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\models\\response\\empleados\\empleadoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\models\\response\\empleados\\empleadoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\models\\response\\equiposdetrabajo\\equipotrabajoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\models\\response\\equiposdetrabajo\\equipotrabajoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\controllers\\empleadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\controllers\\empleadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\repositories\\equipotrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\repositories\\equipotrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\controllers\\equipodetrabajocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\controllers\\equipodetrabajocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|c:\\archivos_de_practica\\proy_gestion_de_empleados\\api\\api-gestionempleados\\repositories\\empleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EB0644B1-4C33-48D3-B3EE-AF17CD7AAAF9}|API-GestionEmpleados\\API-GestionEmpleados.csproj|solutionrelative:api-gestionempleados\\repositories\\empleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,54 +26,41 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EquipodeTrabajoController.cs",
-              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Controllers\\EquipodeTrabajoController.cs",
-              "RelativeDocumentMoniker": "API-GestionEmpleados\\Controllers\\EquipodeTrabajoController.cs",
-              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Controllers\\EquipodeTrabajoController.cs",
-              "RelativeToolTip": "API-GestionEmpleados\\Controllers\\EquipodeTrabajoController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "EmpleadoController.cs",
+              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Controllers\\EmpleadoController.cs",
+              "RelativeDocumentMoniker": "API-GestionEmpleados\\Controllers\\EmpleadoController.cs",
+              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Controllers\\EmpleadoController.cs",
+              "RelativeToolTip": "API-GestionEmpleados\\Controllers\\EmpleadoController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAcwF4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T20:36:51.702Z",
+              "WhenOpened": "2025-09-02T02:22:05.504Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EquipoTrabajoRepository.cs",
-              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\EquipoTrabajoRepository.cs",
-              "RelativeDocumentMoniker": "API-GestionEmpleados\\Repositories\\EquipoTrabajoRepository.cs",
-              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\EquipoTrabajoRepository.cs",
-              "RelativeToolTip": "API-GestionEmpleados\\Repositories\\EquipoTrabajoRepository.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwEsAAAAvAAAAAAAAAA==",
+              "Title": "EmpleadoRepository.cs",
+              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\EmpleadoRepository.cs",
+              "RelativeDocumentMoniker": "API-GestionEmpleados\\Repositories\\EmpleadoRepository.cs",
+              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\EmpleadoRepository.cs",
+              "RelativeToolTip": "API-GestionEmpleados\\Repositories\\EmpleadoRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T20:36:34.511Z",
+              "WhenOpened": "2025-09-02T02:21:37.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "IEquipoTrabajoRepository.cs",
-              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\Interfaces\\IEquipoTrabajoRepository.cs",
-              "RelativeDocumentMoniker": "API-GestionEmpleados\\Repositories\\Interfaces\\IEquipoTrabajoRepository.cs",
-              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Repositories\\Interfaces\\IEquipoTrabajoRepository.cs",
-              "RelativeToolTip": "API-GestionEmpleados\\Repositories\\Interfaces\\IEquipoTrabajoRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Title": "EmpleadoResponse.cs",
+              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Models\\Response\\Empleados\\EmpleadoResponse.cs",
+              "RelativeDocumentMoniker": "API-GestionEmpleados\\Models\\Response\\Empleados\\EmpleadoResponse.cs",
+              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Models\\Response\\Empleados\\EmpleadoResponse.cs",
+              "RelativeToolTip": "API-GestionEmpleados\\Models\\Response\\Empleados\\EmpleadoResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T20:36:30.591Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EquipoTrabajoResponse.cs",
-              "DocumentMoniker": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Models\\Response\\EquiposdeTrabajo\\EquipoTrabajoResponse.cs",
-              "RelativeDocumentMoniker": "API-GestionEmpleados\\Models\\Response\\EquiposdeTrabajo\\EquipoTrabajoResponse.cs",
-              "ToolTip": "C:\\archivos_de_practica\\Proy_Gestion_de_Empleados\\API\\API-GestionEmpleados\\Models\\Response\\EquiposdeTrabajo\\EquipoTrabajoResponse.cs",
-              "RelativeToolTip": "API-GestionEmpleados\\Models\\Response\\EquiposdeTrabajo\\EquipoTrabajoResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T20:36:09.721Z",
+              "WhenOpened": "2025-09-02T02:18:19.398Z",
               "EditorCaption": ""
             }
           ]

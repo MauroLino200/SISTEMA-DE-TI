@@ -14,7 +14,11 @@ namespace API_GestionEmpleados.Repositories.Interfaces
 
         Task<EquipoTrabajoResponse> ObtenerPorNombreAsync(string nom_equipo);
 
+        Task<EquipoTrabajoResponse> ObtenerPorTipoEquipoAsync(string tipo_equipo);
 
+        Task<EquipoTrabajoResponse> ObtenerPorEstadoAsync(string estado);
+
+        Task<EquipoTrabajoResponse> ObtenerPorFechaAsync(DateTime fecha);
 
     }
 }

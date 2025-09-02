@@ -17,6 +17,8 @@ namespace API_GestionEmpleados.Controllers
             _repo = repo;
         }
 
+        #region Filtrados y selecciones
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EquipoTrabajoResponse>>> GetAll()
         {
@@ -24,6 +26,52 @@ namespace API_GestionEmpleados.Controllers
             return Ok(result);
         }
 
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<EquipoTrabajoResponse>> GetById(int id)
+        {
+            var result = await _repo.ObtenerPorIdAsync(id);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+
+        [HttpGet("name/{nom_equipo}")]
+        public async Task<ActionResult<EquipoTrabajoResponse>> GetByName(string nom_equipo)
+        {
+            var result = await _repo.ObtenerPorNombreAsync(nom_equipo);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("type/{tipo_equipo}")]
+        public async Task<ActionResult<EquipoTrabajoResponse>> GetByTypeOfThing(string tipo_equipo)
+        {
+            var result = await _repo.ObtenerPorTipoEquipoAsync(tipo_equipo);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("status/{estado}")]
+        public async Task<ActionResult<EquipoTrabajoResponse>> GetByStatus(string estado)
+        {
+            var result = await _repo.ObtenerPorEstadoAsync(estado);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [HttpGet("date/{fecha}")]
+        public async Task<ActionResult<EquipoTrabajoResponse>> GetByDate(DateTime fecha)
+        {
+            var result = await _repo.ObtenerPorFechaAsync(fecha);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+      
+
+        #endregion
+
+        #region CRUD
 
         [HttpPost]
         public async Task<ActionResult<int>> Insert([FromBody] EquipoTrabajoInsertRequest request)
@@ -48,24 +96,7 @@ namespace API_GestionEmpleados.Controllers
             return NoContent();
         }
 
-        [HttpGet("id/{id}")]
-        public async Task<ActionResult<EquipoTrabajoResponse>> GetById(int id)
-        {
-            var result = await _repo.ObtenerPorIdAsync(id);
-            if (result == null) return NotFound();
-            return Ok(result);
-        }
-
-
-        [HttpGet("name/{nom_equipo}")]
-        public async Task<ActionResult<EquipoTrabajoResponse>> GetByName(string nom_equipo)
-        {
-            var result = await _repo.ObtenerPorNombreAsync(nom_equipo);
-            if (result == null) return NotFound();
-            return Ok(result);
-        }
-
-
+        #endregion
 
     }
 }

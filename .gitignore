@@ -1,0 +1,39 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rtifacts/
+*.exe
+*.dll
+*.pdb
+
+# Archivos de VS temporales
+*.db
+*.db-shm
+*.db-wal
+*.vsidx
+
+# Archivos generados por dependencias
+*.cache
+*.config
+*.json.backup
+*.tmp
+
+# Archivos de publicación
+.publish/
+*.Publish.xml
+
+# Archivos de usuario
+*.swp
+*~

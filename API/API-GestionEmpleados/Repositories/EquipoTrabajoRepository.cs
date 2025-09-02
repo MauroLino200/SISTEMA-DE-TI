@@ -16,12 +16,58 @@ namespace API_GestionEmpleados.Repositories
             _executor = executor;
         }
 
+        #region Filtrados y selecciones
+
+        // obtener todos los equipos de trabajo
         public async Task<IEnumerable<EquipoTrabajoResponse>> ObtenerTodosAsync()
         {
             var sp = "USP_GET_ALL_EQUIPOS";
             return await _executor.ExecuteCommand(con => con.QueryAsync<EquipoTrabajoResponse>(sp, commandType: CommandType.StoredProcedure));
         }
 
+        public async Task<EquipoTrabajoResponse> ObtenerPorIdAsync(int id)
+        {
+            var sp = "USP_GET_ONE_EQUIPO_BY_ID";
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdEquipo", id, DbType.Int32);
+            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+        }
+
+        public async Task<EquipoTrabajoResponse> ObtenerPorNombreAsync(string nom_equipo)
+        {
+            var sp = "USP_GET_EQUIPOS_BY_NAME";
+            var parameters = new DynamicParameters();
+            parameters.Add("@NombreEquipo", nom_equipo, DbType.String);
+            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+        }
+
+        public async Task<EquipoTrabajoResponse> ObtenerPorTipoEquipoAsync(string tipo_equipo)
+        {
+            var sp = "USP_GET_EQUIPOS_BY_TYPE";
+            var parameters = new DynamicParameters();
+            parameters.Add("@TipoEquipo", tipo_equipo, DbType.String);
+            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+        }
+
+        public async Task<EquipoTrabajoResponse> ObtenerPorEstadoAsync(string estado)
+        {
+            var sp = "USP_GET_EQUIPOS_BY_STATEMENT";
+            var parameters = new DynamicParameters();
+            parameters.Add("@Estado", estado, DbType.String);
+            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+        }
+
+        public async Task<EquipoTrabajoResponse> ObtenerPorFechaAsync(DateTime fecha)
+        {
+            var sp = "USP_GET_EQUIPOS_BY_DATE";
+            var parameters = new DynamicParameters();
+            parameters.Add("@@FechaAsignacion", fecha, DbType.DateTime);
+            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+        }
+
+        #endregion
+
+        #region Insercion, actualizacion y eliminacion
 
         public async Task<int> InsertarAsync(EquipoTrabajoInsertRequest request)
         {
@@ -61,15 +107,7 @@ namespace API_GestionEmpleados.Repositories
             return result > 0;
         }
 
-
-
-        public async Task<EquipoTrabajoResponse> ObtenerPorIdAsync(int id)
-        {
-            var sp = "USP_GET_ONE_EQUIPO_BY_ID";
-            var parameters = new DynamicParameters();
-            parameters.Add("@IdEquipo", id, DbType.Int32);
-            return await _executor.ExecuteCommand(con => con.QueryFirstOrDefaultAsync<EquipoTrabajoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
-        }
+        #endregion
 
     }
 }

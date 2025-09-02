@@ -3,7 +3,8 @@
     public class EmpleadoResponse
     {
         public int IdEmpleado { get; set; }
-        public string? DNI { get; set; }
+        public int IdTipoDocumento { get; set; }
+        public int NumeroDocumento { get; set; }
         public string? NombreCompleto { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string? Turno { get; set; }

@@ -66,50 +66,56 @@ VALUES
 ('Comercial', 'Edificio C');
 GO
 
+CREATE TABLE TblTipoDocumento (
+    IdTipoDocumento  INT IDENTITY(1,1) PRIMARY KEY,
+	TipoDocumento VARCHAR (20) not null unique
+);
+GO
+
+
+INSERT INTO TblTipoDocumento (TipoDocumento)
+VALUES ('DNI'), ('Pasaporte'), ('Carnet Extranjería');
+
 
 -- Tabla de Empleados
 CREATE TABLE TblEmpleado (
     IdEmpleado INT IDENTITY(1,1) PRIMARY KEY,
-    DNI CHAR(8) UNIQUE NOT NULL CHECK(DNI LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    IdTipoDocumento int,
+	NumeroDocumento VARCHAR(50) NOT NULL UNIQUE,
     NombreCompleto VARCHAR(100) NOT NULL,
     FechaIngreso DATE NOT NULL,
     Turno CHAR(1)  NOT NULL CHECK(Turno IN ('M','T','N')), -- M=mañana, T=tarde, N=noche
     Correo VARCHAR(100) NOT NULL UNIQUE,
     IdCargo INT REFERENCES TblCargo,
-	IdDepartamento INT REFERENCES TblDepartamento
+	IdDepartamento INT REFERENCES TblDepartamento,
+	IdTipoDocumento INT REFERENCES TblTipoDocumento	
 );
 GO
-
--- Asegúrate de que la columna no permita valores nulos
-ALTER TABLE TblEmpleado
-ALTER COLUMN DNI CHAR(8) NOT NULL;
-
--- Asegúrate de que el valor sea único
-ALTER TABLE TblEmpleado
-ADD CONSTRAINT UQ_TblEmpleado_DNI UNIQUE (DNI);
-
--- Asegúrate de que tenga 8 dígitos numéricos
-ALTER TABLE TblEmpleado
-ADD CONSTRAINT CHK_TblEmpleado_DNI CHECK (DNI LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]');
 
 
 select * from dbo.TblEmpleado
 
 
--- insercion 
-INSERT INTO TblEmpleado (DNI, NombreCompleto, FechaIngreso, Turno, Correo, IdCargo, IdDepartamento)
+-- Supongamos que tienes estos registros en TblTipoDocumento:
+-- 1 = DNI
+-- 2 = Pasaporte
+-- 3 = Carnet de Extranjería
+
+INSERT INTO TblEmpleado 
+(IdTipoDocumento, NumeroDocumento, NombreCompleto, FechaIngreso, Turno, Correo, IdCargo, IdDepartamento)
 VALUES
-('12345678', 'Andrea Torres Vega', '2022-03-01', 'M', 'andrea.torres@empresa.com', 1, 2),
-('23456789', 'Luis Méndez Paredes', '2021-12-10', 'T', 'luis.mendez@empresa.com', 2, 4),
-('34567890', 'María García Salas', '2022-07-15', 'M', 'maria.garcia@empresa.com', 3, 2),
-('45678901', 'Carlos Ruiz Campos', '2023-01-20', 'N', 'carlos.ruiz@empresa.com', 4, 1),
-('56789012', 'Elena López Díaz', '2022-10-05', 'M', 'elena.lopez@empresa.com', 1, 2),
-('67890123', 'Jorge Fernández Soto', '2022-09-01', 'T', 'jorge.fernandez@empresa.com', 5, 1),
-('78901234', 'Valeria Díaz Moreno', '2023-02-14', 'M', 'valeria.diaz@empresa.com', 2, 4),
-('89012345', 'Renzo Carrillo Núñez', '2022-05-12', 'N', 'renzo.carrillo@empresa.com', 3, 2),
-('90123456', 'Lucía Herrera León', '2023-04-18', 'T', 'lucia.herrera@empresa.com', 4, 1),
-('01234567', 'Diego Silva Romero', '2022-08-25', 'M', 'diego.silva@empresa.com', 1, 2);
+(1, '12345678', 'Andrea Torres Vega', '2022-03-01', 'M', 'andrea.torres@empresa.com', 1, 2),
+(1, '23456789', 'Luis Méndez Paredes', '2021-12-10', 'T', 'luis.mendez@empresa.com', 2, 4),
+(1, '34567890', 'María García Salas', '2022-07-15', 'M', 'maria.garcia@empresa.com', 3, 2),
+(1, '45678901', 'Carlos Ruiz Campos', '2023-01-20', 'N', 'carlos.ruiz@empresa.com', 4, 1),
+(1, '56789012', 'Elena López Díaz', '2022-10-05', 'M', 'elena.lopez@empresa.com', 1, 2),
+(1, '67890123', 'Jorge Fernández Soto', '2022-09-01', 'T', 'jorge.fernandez@empresa.com', 5, 1),
+(1, '78901234', 'Valeria Díaz Moreno', '2023-02-14', 'M', 'valeria.diaz@empresa.com', 2, 4),
+(1, '89012345', 'Renzo Carrillo Núñez', '2022-05-12', 'N', 'renzo.carrillo@empresa.com', 3, 2),
+(1, '90123456', 'Lucía Herrera León', '2023-04-18', 'T', 'lucia.herrera@empresa.com', 4, 1),
+(1, '01234567', 'Diego Silva Romero', '2022-08-25', 'M', 'diego.silva@empresa.com', 1, 2);
 GO
+
 
 
 -- equipos  --
