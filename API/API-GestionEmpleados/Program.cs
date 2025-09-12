@@ -12,6 +12,7 @@ builder.Services.AddScoped<IDatabaseExecutor>(provider =>
 });
 
 builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
+builder.Services.AddScoped<IUsuariosRepository, UsuarioRepository>();
 builder.Services.AddScoped<IEvaluacionRepository, EvaluacionRepository>();
 builder.Services.AddScoped<IEquipoTrabajoRepository, EquipoTrabajoRepository>();
 builder.Services.AddScoped<IReservaRepository, ReservaRepository>();

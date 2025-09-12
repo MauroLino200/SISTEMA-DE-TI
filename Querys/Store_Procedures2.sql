@@ -17,8 +17,8 @@ BEGIN
         Marca           = EQM.Marca,
         Cantidad        = SEQM.Cantidad,
         FechaAsignacion = EQT.FechaAsignacion,
-		ESTADO =	 CASE EQT.Estado 
-					 WHEN 'N' THEN 'Nuevo'
+		Estado  =	 CASE EQT.Estado 
+								WHEN 'N' THEN 'Nuevo'
 								WHEN 'S' THEN 'Segunda Mano'
 								WHEN 'A' THEN 'Alquilado'
 								END
@@ -831,8 +831,7 @@ END
 -- EXEC USP_GET_ONE_EMPLEADO_BY_ID 3
 GO
 
-
-CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_ITS_NUMBER_OF_DOCUMENT
+CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_ITS_DOCUMENT_NUMBER
  @NumeroDocumento VARCHAR(50)
 AS
 BEGIN
@@ -857,7 +856,7 @@ BEGIN
         INNER JOIN TblDepartamento D ON E.IdDepartamento = D.IdDepartamento
 	WHERE E.NumeroDocumento = @NumeroDocumento
 END
--- EXEC USP_GET_ONE_EMPLEADO_BY_ITS_NUMBER_OF_DOCUMENT 12345678
+-- EXEC USP_GET_ONE_EMPLEADO_BY_ITS_DOCUMENT_NUMBER 12345678
 GO
 
 CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_NAME
@@ -885,9 +884,10 @@ BEGIN
         INNER JOIN TblDepartamento D ON E.IdDepartamento = D.IdDepartamento
 	WHERE E.NombreCompleto = @NombreCompleto
 END
--- EXEC USP_GET_ONE_EMPLEADO_BY_NAME 'Jorge'
+-- EXEC USP_GET_ONE_EMPLEADO_BY_NAME 'Andrea Torres Vega'
 GO
 
+SELECT * FROM DBO.TblEmpleado
 
 CREATE OR ALTER PROC USP_GET_ONE_EMPLEADO_BY_DATE
  @FechaIngreso DATE
@@ -1001,7 +1001,7 @@ BEGIN
         INNER JOIN TblDepartamento D ON E.IdDepartamento = D.IdDepartamento
 	WHERE E.IdCargo = @IdCargo
 END
--- EXEC USP_GET_EMPLEADOS_BY_CARGO 
+-- EXEC USP_GET_EMPLEADOS_BY_CARGO 2
 GO
 
 
@@ -1100,9 +1100,37 @@ END
 GO
 
 
--- capacitaciones vista empleado 
+
+-- capacitaciones  (por ahora datos estaticos desde la bd)
 
 CREATE OR ALTER PROC USP_GET_ALL_TESTS
+AS
+BEGIN
+	SELECT 
+		EV.IdEvaluacion,
+		CAP.Nombre AS Curso_de_la_Evaluación,
+		EMP.IdEmpleado,
+        EMP.NombreCompleto,
+		CAR.Titulo AS Cargo,
+		DEP.NombreDepartamento,
+		DEP.Ubicacion,
+		EV.IdEstadoEvaluacion AS Estado,
+		EV.Calificacion,
+		EV.Comentarios,
+		EV.FechaEvaluacion,
+		EV.FechaFinalizacion
+    FROM TblEvaluacion EV
+		INNER JOIN TblEmpleado EMP ON EV.IdEmpleado = EMP.IdEmpleado
+        INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
+		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
+		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
+		ORDER BY EV.FechaFinalizacion
+END
+-- EXEC USP_GET_ALL_TESTS 
+GO
+
+CREATE OR ALTER PROC USP_GET_ONE_EVALUACION_BY_ID
+	@IdEvaluacion int
 AS
 BEGIN
 	SELECT 
@@ -1122,10 +1150,65 @@ BEGIN
         INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
 		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
 		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
-		ORDER BY EV.FechaFinalizacion
+		WHERE EV.IdEvaluacion = @IdEvaluacion
 END
--- EXEC USP_GET_ALL_TESTS 
+-- EXEC USP_GET_ONE_EVALUACION_BY_ID 1 
 GO
+
+
+
+CREATE OR ALTER PROC USP_GET_ONE_EVALUACION_BY_EMPLOYEE_ID
+	@IdEmpleado int
+AS
+BEGIN
+	SELECT 
+		EV.IdEvaluacion,
+		CAP.Nombre AS Curso_de_la_Evaluación,
+		EMP.IdEmpleado,
+        EMP.NombreCompleto,
+		CAR.Titulo,
+		DEP.NombreDepartamento,
+		DEP.Ubicacion,
+		EV.Calificacion,
+		EV.FechaEvaluacion,
+		EV.FechaFinalizacion,
+		EV.Comentarios
+    FROM TblEvaluacion EV
+		INNER JOIN TblEmpleado EMP ON EV.IdEmpleado = EMP.IdEmpleado
+        INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
+		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
+		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
+		WHERE EMP.IdEmpleado = @IdEmpleado
+END
+-- EXEC USP_GET_ONE_EVALUACION_BY_EMPLOYEE_ID 1 
+GO
+
+CREATE OR ALTER PROC USP_GET_TEST_BY_DATE
+	@FechaEvaluacion DATE
+AS
+BEGIN
+	SELECT 
+		EV.IdEvaluacion,
+		CAP.Nombre AS Curso_de_la_Evaluación,
+		EMP.IdEmpleado,
+        EMP.NombreCompleto,
+		CAR.Titulo,
+		DEP.NombreDepartamento,
+		DEP.Ubicacion,
+		EV.Calificacion,
+		EV.FechaEvaluacion,
+		EV.FechaFinalizacion,
+		EV.Comentarios
+    FROM TblEvaluacion EV
+		INNER JOIN TblEmpleado EMP ON EV.IdEmpleado = EMP.IdEmpleado
+        INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
+		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
+		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
+		WHERE EV.FechaEvaluacion = @FechaEvaluacion
+END
+-- EXEC USP_GET_TEST_BY_DATE ''
+GO
+
 
 
 CREATE OR ALTER PROC USP_GET_TESTS_BY_COURSE_NAME
@@ -1181,6 +1264,7 @@ BEGIN
 END
 -- EXEC USP_GET_TEST_BY_EMPLOYEE_NAME 
 GO
+ 
 
 
 CREATE OR ALTER PROC USP_GET_TEST_BY_GRADE
@@ -1209,32 +1293,7 @@ END
 -- EXEC USP_GET_TEST_BY_GRADE 1
 GO
 
- 
-CREATE OR ALTER PROC USP_GET_TEST_BY_DATE
-	@FechaEvaluacion DATE
-AS
-BEGIN
-	SELECT 
-		EV.IdEvaluacion,
-		CAP.Nombre AS Curso_de_la_Evaluación,
-		EMP.IdEmpleado,
-        EMP.NombreCompleto,
-		CAR.Titulo,
-		DEP.NombreDepartamento,
-		DEP.Ubicacion,
-		EV.Calificacion,
-		EV.FechaEvaluacion,
-		EV.FechaFinalizacion,
-		EV.Comentarios
-    FROM TblEvaluacion EV
-		INNER JOIN TblEmpleado EMP ON EV.IdEmpleado = EMP.IdEmpleado
-        INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
-		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
-		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
-		WHERE EV.FechaEvaluacion = @FechaEvaluacion
-END
--- EXEC USP_GET_TEST_BY_DATE ''
-GO
+select * from TblEvaluacion
 
 
 
@@ -1487,7 +1546,6 @@ BEGIN
 	SELECT 
 		U.IdUsuario,
 		U.Usuario,
-		U.Contrasena,
 		U.Rol,
 		E.IdEmpleado
 	FROM TblUsuario U
@@ -1495,10 +1553,10 @@ BEGIN
 	ORDER BY U.Usuario
 END
 GO
-
+ 
 exec dbo.USP_GET_ALL_USUARIOS
 
-
+select * from dbo.TblUsuario  
 
 -- INSERT USUARIO
 CREATE OR ALTER PROC USP_INSERT_USUARIO

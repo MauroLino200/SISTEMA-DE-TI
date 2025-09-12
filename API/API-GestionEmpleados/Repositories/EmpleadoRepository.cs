@@ -16,6 +16,8 @@ namespace API_GestionEmpleados.Repositories
             _executor = executor;
         }
 
+        #region seleccion y filtros
+
         public async Task<IEnumerable<EmpleadoResponse>> GetAllEmpleadosAsync()
         {
             var sp = "USP_SELECT_EMPLEADOS";
@@ -23,7 +25,7 @@ namespace API_GestionEmpleados.Repositories
             {
                 var listado = await _executor.ExecuteCommand(conexion => conexion.QueryAsync<EmpleadoResponse>(sp));
                 return listado;
-            
+
             }
             catch (Exception ex)
             {
@@ -31,13 +33,13 @@ namespace API_GestionEmpleados.Repositories
                 throw new Exception(ex.Message);
             }
 
-            }
+        }
 
-        public async Task<EmpleadoResponse> GetEmpleadoByIdAsync(int id)
+        public async Task<EmpleadoResponse> GetOneEmpleadoByIdAsync(int id_emp)
         {
             var sp = "USP_GET_ONE_EMPLEADO_BY_ID";
             var parameters = new DynamicParameters();
-            parameters.Add("@IdEmpleado", id, System.Data.DbType.Int32);
+            parameters.Add("@IdEmpleado", id_emp, System.Data.DbType.Int32);
 
             try
             {
@@ -51,11 +53,141 @@ namespace API_GestionEmpleados.Repositories
             }
         }
 
+        public async Task<EmpleadoResponse> GetOneEmpleadoByItsNumberDocumentAsync(string num_doc)
+        {
+            var sp = "USP_GET_ONE_EMPLEADO_BY_ITS_DOCUMENT_NUMBER";
+            var parameters = new DynamicParameters();
+            parameters.Add("@NumeroDocumento", num_doc, System.Data.DbType.String);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByNameAsync(string nom_emp)
+        {
+            var sp = "USP_GET_ONE_EMPLEADO_BY_NAME";
+            var parameters = new DynamicParameters();
+            parameters.Add("@NombreCompleto", nom_emp, System.Data.DbType.String);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByDateAsync(DateTime fecha_ing)
+        {
+            var sp = "USP_GET_ONE_EMPLEADO_BY_DATE";
+            var parameters = new DynamicParameters();
+            parameters.Add("@FechaIngreso", fecha_ing, System.Data.DbType.DateTime);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByTurnoAsync(string turno)
+        {
+            var sp = "USP_GET_EMPLEADOS_BY_TURNO";
+            var parameters = new DynamicParameters();
+            parameters.Add("@Turno", turno, System.Data.DbType.String);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByEmailAsync(string email)
+        {
+            var sp = "USP_GET_EMPLEADOS_BY_EMAIL";
+            var parameters = new DynamicParameters();
+            parameters.Add("@Correo", email, System.Data.DbType.String);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByCargoAsync(int cargo)
+        {
+            var sp = "USP_GET_EMPLEADOS_BY_CARGO";
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdCargo", cargo, System.Data.DbType.Int64);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<EmpleadoResponse> GetOneEmpleadoByOfficeAsync(int id_dep)
+        {
+            var sp = "USP_GET_EMPLEADOS_BY_OFFICE";
+            var parameters = new DynamicParameters();
+            parameters.Add("@IdDepartamento", id_dep, System.Data.DbType.Int64);
+
+            try
+            {
+                var registro = await _executor.ExecuteCommand(conexion => conexion.QueryFirstOrDefaultAsync<EmpleadoResponse>(sp, parameters, commandType: CommandType.StoredProcedure));
+                return registro;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        #endregion
+
+       
         public async Task<EmpleadoCreateRequest> AddEmpleadoAsync(EmpleadoCreateRequest request)
         {
             var sp = "USP_INSERT_EMPLEADO";
             var parameters = new DynamicParameters();
-            parameters.Add("@DNI", request.DNI, DbType.String);
+            parameters.Add("@IdTipoDocumento", request.IdTipoDocumento, DbType.Int32);
+            parameters.Add("@NumeroDocumento", request.NumeroDocumento, DbType.Int32);
             parameters.Add("@NombreCompleto", request.NombreCompleto, DbType.String);
             parameters.Add("@FechaIngreso", request.FechaIngreso, DbType.DateTime);
             parameters.Add("@Turno", request.Turno, DbType.String);
@@ -80,13 +212,13 @@ namespace API_GestionEmpleados.Repositories
 
         }
 
-       
         public async Task<string> UpdateEmpleadoAsync(int id, EmpleadoUpdateRequest request)
         {
             var sp = "USP_UPDATE_EMPLEADO";
             var parameters = new DynamicParameters();
             parameters.Add("@IdEmpleado", id, DbType.Int32);
-            parameters.Add("@DNI", request.DNI, DbType.String);
+            parameters.Add("@IdTipoDocumento", request.IdTipoDocumento, DbType.Int32);
+            parameters.Add("@NumeroDocumento", request.NumeroDocumento, DbType.Int32);
             parameters.Add("@NombreCompleto", request.NombreCompleto, DbType.String);
             parameters.Add("@FechaIngreso", request.FechaIngreso, DbType.DateTime);
             parameters.Add("@Turno", request.Turno, DbType.String);
@@ -107,8 +239,5 @@ namespace API_GestionEmpleados.Repositories
             }
 
         }
-
-
-        // Uncomment the following methods if you need them in your repository
     }
 }

@@ -17,7 +17,10 @@ namespace API_GestionEmpleados.Controllers
             _empleadosRepository = empleadosRepository;
         }
 
-        [HttpGet("action")]
+
+        #region seleccion y filtros
+
+        [HttpGet("get_empleados")]
         public async Task<ActionResult<IEnumerable<EmpleadoResponse>>> GetAllEmpleadosAsync()
         {
             try
@@ -31,15 +34,15 @@ namespace API_GestionEmpleados.Controllers
             }
         }
 
-        [HttpGet("action/{id}")]
+        [HttpGet("get_empleado_by_i/{id_empleado}")]
         public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByIdAsync(int id)
         {
             try
             {
-                var empleado = await _empleadosRepository.GetEmpleadoByIdAsync(id);
+                var empleado = await _empleadosRepository.GetOneEmpleadoByIdAsync(id);
                 if (empleado == null)
                 {
-                    return NotFound($"Empleado with ID {id} not found.");
+                    return NotFound($"Empleado with 'ID':{id} not found.");
                 }
                 return Ok(empleado);
             }
@@ -49,7 +52,138 @@ namespace API_GestionEmpleados.Controllers
             }
         }
 
-        [HttpPost("action")]
+        [HttpGet("get_empleado_by_n/{num_doc}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByItsNumberDocumentAsync(string num_doc)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByItsNumberDocumentAsync(num_doc);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'num':{num_doc} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_na/{nom_emp}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByNameAsync(string nom_emp)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByNameAsync(nom_emp);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'name':{nom_emp} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_fi/{fecha_ing}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByDateAsync(DateTime fecha_ing)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByDateAsync(fecha_ing);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'datetime':{fecha_ing} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_t/{turno}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByTurnoAsync(string turno)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByTurnoAsync(turno);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'turno':{turno} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_em/{email}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByEmailAsync(string email)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByEmailAsync(email);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'email':{email} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_cg/{cargo}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByCargoAsync(int cargo)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByCargoAsync(cargo);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'cargo':{cargo} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+        [HttpGet("get_empleado_by_dep/{departamento}")]
+        public async Task<ActionResult<EmpleadoResponse>> GetEmpleadoByOffice(int id_dep)
+        {
+            try
+            {
+                var empleado = await _empleadosRepository.GetOneEmpleadoByOfficeAsync(id_dep);
+                if (empleado == null)
+                {
+                    return NotFound($"Empleado with 'departamento':{id_dep} not found.");
+                }
+                return Ok(empleado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+            }
+        }
+
+
+
+
+        #endregion
+
+        [HttpPost("insrt_emp")]
         public async Task<ActionResult<EmpleadoCreateRequest>> AddEmpleadoAsync([FromBody] EmpleadoCreateRequest request)
         {
             if (request == null)
@@ -66,7 +200,9 @@ namespace API_GestionEmpleados.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error creating data: {ex.Message}");
             }
         }
-        [HttpPut("action/{id}")]
+      
+        
+        [HttpPut("updt_emp/{id}")]
         public async Task<ActionResult<string>> UpdateEmpleadoAsync(int id, [FromBody] EmpleadoUpdateRequest request)
         {
             if (request == null || id != request.IdEmpleado)
@@ -87,8 +223,5 @@ namespace API_GestionEmpleados.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error actualizando datos: {ex.Message}");
             }
         }
-
-
-
     }
 }

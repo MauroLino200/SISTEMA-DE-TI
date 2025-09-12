@@ -19,9 +19,11 @@ namespace API_GestionEmpleados.Repositories
             _executor = executor;
         }
 
+        #region Seleccion y Filtros
+
         public async Task<IEnumerable<EvaluacionResponse>> ObtenerTodasLasEvaluacionesAsync()
         {
-            var sp = "USP_SELECT_EVALUACIONES";
+            var sp = "USP_GET_ALL_TESTS";
             try
             {
                 var listado = await _executor.ExecuteCommand(conexion => conexion.QueryAsync<EvaluacionResponse>(sp));
@@ -36,12 +38,11 @@ namespace API_GestionEmpleados.Repositories
 
         }
 
-
-        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorCapacitacionAsync(int idCapacitacion)
+        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionPorIdAsync(int id)
         {
-            var sp = "USP_GET_ONE_EVALUACION_BY_CAPACITACIONES_ID";
+            var sp = "USP_GET_ONE_EVALUACION_BY_ID";
             var parameters = new DynamicParameters();
-            parameters.Add("@IdCapacitacion", idCapacitacion, DbType.Int32);
+            parameters.Add("@IdEvaluacion", id, DbType.Int32);
 
             try
             {
@@ -60,7 +61,6 @@ namespace API_GestionEmpleados.Repositories
                 throw new Exception($"Error al obtener evaluaciones: {ex.Message}", ex);
             }
         }
-
 
         public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorEmpleadoAsync(int idEmpleado)
         {
@@ -84,11 +84,11 @@ namespace API_GestionEmpleados.Repositories
             {
                 throw new Exception($"Error al obtener evaluaciones: {ex.Message}", ex);
             }
-        }        
+        }
 
         public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorFechanAsync(DateTime fecha)
         {
-            var sp = "USP_GET_ONE_EVALUACION_BY_DATE";
+            var sp = "USP_GET_TEST_BY_DATE";
             var parameters = new DynamicParameters();
             parameters.Add("@FechaEvaluacion", fecha, DbType.Int32);
 
@@ -110,11 +110,12 @@ namespace API_GestionEmpleados.Repositories
             }
         }
 
-        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionPorIdAsync(int id)
+        
+        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorNombreCursoAsync(string nom_curso)
         {
-            var sp = "USP_GET_ONE_EVALUACION_BY_TEST_ID";
+            var sp = "USP_GET_TESTS_BY_COURSE_NAME";
             var parameters = new DynamicParameters();
-            parameters.Add("@IdEvaluacion", id, DbType.Int32);
+            parameters.Add("@Nombre", nom_curso, DbType.String);
 
             try
             {
@@ -130,10 +131,59 @@ namespace API_GestionEmpleados.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al obtener evaluaciones: {ex.Message}", ex);
+                throw new Exception($"Error al obtener nombre del curso: {ex.Message}", ex);
             }
         }
 
+        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorNombreEmpleadoAsync(string nom_completo)
+        {
+            var sp = "USP_GET_TEST_BY_EMPLOYEE_NAME";
+            var parameters = new DynamicParameters();
+            parameters.Add("@NombreCompleto", nom_completo, DbType.String);
+
+            try
+            {
+                var registros = await _executor.ExecuteCommand(
+                    conexion => conexion.QueryAsync<EvaluacionResponse>(
+                        sp,
+                        parameters,
+                        commandType: CommandType.StoredProcedure
+                    )
+                );
+
+                return registros;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener nombre del empleado: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorNotaAsync(int calificacion) 
+        {
+            var sp = "USP_GET_TEST_BY_GRADE";
+            var parameters = new DynamicParameters();
+            parameters.Add("@Calificacion", calificacion, DbType.String);
+
+            try
+            {
+                var registros = await _executor.ExecuteCommand(
+                    conexion => conexion.QueryAsync<EvaluacionResponse>(
+                        sp,
+                        parameters,
+                        commandType: CommandType.StoredProcedure
+                    )
+                );
+
+                return registros;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener las notas: {ex.Message}", ex);
+            }
+        }
+
+        #endregion
 
         public async Task<EvaluacionInsertRequest?> InsertarEvaluacionAsync(EvaluacionInsertRequest evaluacion)
         {
@@ -215,7 +265,5 @@ namespace API_GestionEmpleados.Repositories
                 throw new Exception($"Error al eliminar la evaluación: {ex.Message}", ex);
             }
         }
-
-        
     }
 }

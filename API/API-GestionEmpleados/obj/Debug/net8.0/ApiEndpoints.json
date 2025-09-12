@@ -182,8 +182,226 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByCargoAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_cg/{cargo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cargo",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByOffice",
+    "RelativePath": "api/Empleado/get_empleado_by_dep/{departamento}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id_dep",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "departamento",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByEmailAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_em/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByDateAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_fi/{fecha_ing}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fecha_ing",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByIdAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_i/{id_empleado}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id_empleado",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByItsNumberDocumentAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_n/{num_doc}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "num_doc",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByNameAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_na/{nom_emp}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nom_emp",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
+    "Method": "GetEmpleadoByTurnoAsync",
+    "RelativePath": "api/Empleado/get_empleado_by_t/{turno}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "turno",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
     "Method": "GetAllEmpleadosAsync",
-    "RelativePath": "api/Empleado/action",
+    "RelativePath": "api/Empleado/get_empleados",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -203,7 +421,7 @@
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
     "Method": "AddEmpleadoAsync",
-    "RelativePath": "api/Empleado/action",
+    "RelativePath": "api/Empleado/insrt_emp",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -228,34 +446,8 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
-    "Method": "GetEmpleadoByIdAsync",
-    "RelativePath": "api/Empleado/action/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "API_GestionEmpleados.Models.Response.Empleados.EmpleadoResponse",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "API_GestionEmpleados.Controllers.EmpleadoController",
     "Method": "UpdateEmpleadoAsync",
-    "RelativePath": "api/Empleado/action/{id}",
+    "RelativePath": "api/Empleado/updt_emp/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -571,12 +763,18 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
-    "Method": "ObtenerTodasLasEvaluacionesAsync",
-    "RelativePath": "api/Evaluacion/action",
+    "Method": "ObtenerEvaluacionesPorNombreCursoAsync",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_course_name/{nom_curso}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "nom_curso",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -591,26 +789,83 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
-    "Method": "ObtenerEvaluacionesPorCapacitacionAsync",
-    "RelativePath": "api/Evaluacion/capacitacion/{id}",
+    "Method": "ObtenerEvaluacionesPorFechanAsync",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_date/{fecha}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idCapacitacion",
-        "Type": "System.Int32",
+        "Name": "fecha",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
+    "Method": "ObtenerEvaluacionesPorNombreEmpleadonAsync",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_employee_name/{nom_emp}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nom_completo",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "id",
+        "Name": "nom_emp",
         "Type": "",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
+    "Method": "ObtenerEvaluacionesPorNombreEmpleadonAsync",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_grade/{nota}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "calificacion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nota",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -623,7 +878,7 @@
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
     "Method": "ObtenerEvaluacionesPorEmpleadoAsync",
-    "RelativePath": "api/Evaluacion/empleado/{id}",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_id_empleado/{id_empleado}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -634,7 +889,7 @@
         "IsRequired": false
       },
       {
-        "Name": "id",
+        "Name": "id_empleado",
         "Type": "",
         "IsRequired": true
       }
@@ -653,15 +908,20 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
-    "Method": "ObtenerEvaluacionPorIdAsync",
-    "RelativePath": "api/Evaluacion/evaluacion/{id}",
+    "Method": "ObtenerEvaluacionesPorCapacitacionAsync",
+    "RelativePath": "api/Evaluacion/get_capacitacion_by_its_id/{id_capacitacion}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "idCapacitacion",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "id_capacitacion",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -679,18 +939,12 @@
   },
   {
     "ContainingType": "API_GestionEmpleados.Controllers.EvaluacionController",
-    "Method": "ObtenerEvaluacionesPorFechanAsync",
-    "RelativePath": "api/Evaluacion/por-fecha/{fecha}",
+    "Method": "ObtenerTodasLasEvaluacionesAsync",
+    "RelativePath": "api/Evaluacion/get_evaluaciones",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "fecha",
-        "Type": "System.DateTime",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Evaluaciones.EvaluacionResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -922,6 +1176,26 @@
     "ReturnTypes": [
       {
         "Type": "API_GestionEmpleados.Models.Response.Reserva.ReservaResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API_GestionEmpleados.Controllers.UsuariosController",
+    "Method": "GetAllUsuariosAsync",
+    "RelativePath": "api/Usuarios/get_usuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_GestionEmpleados.Models.Response.Usuarios.UsuariosResponse, API-GestionEmpleados, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

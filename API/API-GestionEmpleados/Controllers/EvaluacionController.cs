@@ -19,7 +19,7 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("action")]
+        [HttpGet("get_evaluaciones")]
         public async Task<ActionResult<IEnumerable<EvaluacionResponse>>> ObtenerTodasLasEvaluacionesAsync()
         {
             try
@@ -34,12 +34,12 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("capacitacion/{id}")]
+        [HttpGet("get_capacitacion_by_its_id/{id_capacitacion}")]
         public async Task<ActionResult<EvaluacionResponse>> ObtenerEvaluacionesPorCapacitacionAsync(int idCapacitacion)
         {
             try
             {
-                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorCapacitacionAsync(idCapacitacion);
+                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionPorIdAsync(idCapacitacion);
                 if (evaluaciones == null)
                 {
                     return NotFound($"Empleado with ID {idCapacitacion} not found.");
@@ -53,7 +53,7 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("empleado/{id}")]
+        [HttpGet("get_capacitacion_by_id_empleado/{id_empleado}")]
         public async Task<ActionResult<EvaluacionResponse>> ObtenerEvaluacionesPorEmpleadoAsync(int idEmpleado)
         {
             try
@@ -72,7 +72,7 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("por-fecha/{fecha}")]
+        [HttpGet("get_capacitacion_by_date/{fecha}")]
         public async Task<ActionResult<IEnumerable<EvaluacionResponse>>> ObtenerEvaluacionesPorFechanAsync(DateTime fecha)
         {
             try
@@ -91,23 +91,66 @@ namespace API_GestionEmpleados.Controllers
         }
 
 
-        [HttpGet("evaluacion/{id}")]
-        public async Task<ActionResult<EvaluacionResponse>> ObtenerEvaluacionPorIdAsync(int id)
+        [HttpGet("get_capacitacion_by_course_name/{nom_curso}")]
+        public async Task<ActionResult<IEnumerable<EvaluacionResponse>>> ObtenerEvaluacionesPorNombreCursoAsync(string nom_curso)
         {
             try
             {
-                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionPorIdAsync(id);
-                if (evaluaciones == null)
+                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorNombreCursoAsync(nom_curso);
+                if (evaluaciones == null || !evaluaciones.Any())
                 {
-                    return NotFound($"Empleado with ID {id} not found.");
+                    return NotFound($"No se encontraron evaluaciones para {nom_curso}.");
                 }
                 return Ok(evaluaciones);
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al recuperar los datos: {ex.Message}");
             }
         }
+
+
+
+        [HttpGet("get_capacitacion_by_employee_name/{nom_emp}")]
+        public async Task<ActionResult<IEnumerable<EvaluacionResponse>>> ObtenerEvaluacionesPorNombreEmpleadonAsync(string nom_completo)
+        {
+            try
+            {
+                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorNombreEmpleadoAsync(nom_completo);
+                if (evaluaciones == null || !evaluaciones.Any())
+                {
+                    return NotFound($"No se encontraron evaluaciones para el empleado {nom_completo}.");
+                }
+                return Ok(evaluaciones);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al recuperar los datos: {ex.Message}");
+            }
+        }
+
+
+
+        [HttpGet("get_capacitacion_by_grade/{nota}")]
+        public async Task<ActionResult<IEnumerable<EvaluacionResponse>>> ObtenerEvaluacionesPorNombreEmpleadonAsync(int calificacion)
+        {
+            try
+            {
+                var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorNotaAsync(calificacion);
+                if (evaluaciones == null || !evaluaciones.Any())
+                {
+                    return NotFound($"No se encontraron evaluaciones para la fecha {calificacion}.");
+                }
+                return Ok(evaluaciones);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error al recuperar los datos: {ex.Message}");
+            }
+        }
+
+
+
         [HttpPost]
         public async Task<ActionResult<EvaluacionInsertRequest>> InsertarEvaluacionAsync(EvaluacionInsertRequest evaluacion)
         {
@@ -128,6 +171,7 @@ namespace API_GestionEmpleados.Controllers
             }
         }
 
+
         [HttpPut("{id}")]
         public async Task<ActionResult<EvalucacionUpdateRequest>> ActualizarEvaluacionAsync(int id, EvalucacionUpdateRequest evaluacion)
         {
@@ -146,6 +190,7 @@ namespace API_GestionEmpleados.Controllers
             }
         }
 
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> EliminarEvaluacionAsync(int id)
         {
@@ -163,9 +208,5 @@ namespace API_GestionEmpleados.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al eliminar la evaluación: {ex.Message}");
             }
         }
-
-
-
-
     }
 }
