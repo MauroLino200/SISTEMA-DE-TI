@@ -1,0 +1,130 @@
+﻿@model IEnumerable<WebAppGestionEmpleados.Models.Response.EquipodeTrabajoResponse>
+
+@{
+    ViewData["Title"] = "ListarEquipos";
+}
+
+<h1>ListarEquipos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<input type="text" id="searchBox" placeholder="Buscar equipo por nombre..." class="form-control mb-3" />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEquipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEquipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdModelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoEquipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaAsignacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEquipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEquipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdModelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoEquipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaAsignacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@if (TempData["mensaje"] != null)
+{
+    @Html.Raw(TempData["mensaje"])
+}
+
+<div>
+    @for (int i = 0; i < ViewBag.paginas; i++)
+    {
+        <a asp-action="ListarEquipos" asp-route-numberPage="@i"
+           class="btn @(i == ViewBag.numberPage ? "btn-success" : "btn btn-outline-primary")">
+            @(i + 1)
+        </a>
+    }
+</div>
+
+@section Scripts {
+    <script>
+                searchBox.addEventListener("keyup", function () {
+            const term = this.value;
+
+            if (term.length === 0) {
+                // 🔄 restaurar la tabla original si no hay texto
+                location.reload();
+                return;
+            }
+
+            fetch(`/EquiposdeTrabajo/BuscarPorNombre?term=${term}`)
+                .then(response => response.json())
+                .then(item => {
+                    resultsBody.innerHTML = "";
+
+                    if (item) {
+                        resultsBody.innerHTML = `
+                            <tr>
+                                <td>${item.idEquipo}</td>
+                                <td>${item.nombreEquipo}</td>
+                                <td>${item.idModelo}</td>
+                                <td>${item.tipoEquipo}</td>
+                                <td>${item.marca}</td>
+                                <td>${item.cantidad}</td>
+                                <td>${item.fechaAsignacion}</td>
+                                <td>${item.estado}</td>
+                            </tr>`;
+                    }
+                });
+        });
+    </script>
+}

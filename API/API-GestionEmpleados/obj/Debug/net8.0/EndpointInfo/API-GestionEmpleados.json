@@ -5,6 +5,305 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Asistencia/get_asistencias": {
+      "get": {
+        "tags": [
+          "Asistencia"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AsistenciasResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AsistenciasResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AsistenciasResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Asistencia/get_asistencias_by_employee_name/{employee_name}": {
+      "get": {
+        "tags": [
+          "Asistencia"
+        ],
+        "parameters": [
+          {
+            "name": "nom_emp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "employee_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Asistencia/get_asistencias_by_number_document/{num_doc}": {
+      "get": {
+        "tags": [
+          "Asistencia"
+        ],
+        "parameters": [
+          {
+            "name": "num_doc",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Asistencia/get_asistencias_by_date/{date}": {
+      "get": {
+        "tags": [
+          "Asistencia"
+        ],
+        "parameters": [
+          {
+            "name": "fecha",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsistenciasResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Asistencia": {
+      "post": {
+        "tags": [
+          "Asistencia"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasInsert"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasInsert"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasInsert"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionInsertRequest"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionInsertRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluacionInsertRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Asistencia/{id}": {
+      "put": {
+        "tags": [
+          "Asistencia"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasUpdate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasUpdate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsistenciasUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalucacionUpdateRequest"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalucacionUpdateRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalucacionUpdateRequest"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Asistencia"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Devoluciones": {
       "get": {
         "tags": [
@@ -2038,6 +2337,128 @@
   },
   "components": {
     "schemas": {
+      "AsistenciasInsert": {
+        "type": "object",
+        "properties": {
+          "idEmpleado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTipoDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idCargo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDepartamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "horaEntrada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horaSalida": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsistenciasResponse": {
+        "type": "object",
+        "properties": {
+          "idAsistencia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idEmpleado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTipoDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idCargo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDepartamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "horaEntrada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horaSalida": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsistenciasUpdate": {
+        "type": "object",
+        "properties": {
+          "idAsistencia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idEmpleado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTipoDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idCargo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDepartamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "horaEntrada": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "horaSalida": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "DevolucionesInsertRequest": {
         "type": "object",
         "properties": {
@@ -2353,8 +2774,9 @@
             "type": "string",
             "format": "date-time"
           },
-          "estado": {
-            "type": "boolean"
+          "idEstadoEvaluacion": {
+            "type": "integer",
+            "format": "int32"
           },
           "calificacion": {
             "type": "integer",
@@ -2420,6 +2842,10 @@
       "EvalucacionUpdateRequest": {
         "type": "object",
         "properties": {
+          "idEvaluacion": {
+            "type": "integer",
+            "format": "int32"
+          },
           "idEmpleado": {
             "type": "integer",
             "format": "int32"
@@ -2436,8 +2862,9 @@
             "type": "string",
             "format": "date-time"
           },
-          "estado": {
-            "type": "boolean"
+          "idEstadoEvaluacion": {
+            "type": "integer",
+            "format": "int32"
           },
           "calificacion": {
             "type": "integer",

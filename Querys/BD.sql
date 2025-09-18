@@ -216,11 +216,10 @@ GO
 CREATE TABLE TblAsistencia (
     IdAsistencia INT IDENTITY(1,1) PRIMARY KEY,
     IdEmpleado INT REFERENCES TblEmpleado,
-    Fecha DATE NOT NULL,
-    HoraEntrada TIME,
-    HoraSalida TIME
+    HoraEntrada DATETIME NOT NULL,  -- fecha y hora de entrada
+    HoraSalida DATETIME NULL        -- fecha y hora de salida
 );
-GO
+
 
 
 CREATE TABLE TblEstadoPermiso (
@@ -268,8 +267,6 @@ CREATE TABLE TblEvaluacion (
     Comentarios TEXT
 );
 GO
-
-use SISTEMA_DE_TI
 
 
 ALTER TABLE TblEvaluacion

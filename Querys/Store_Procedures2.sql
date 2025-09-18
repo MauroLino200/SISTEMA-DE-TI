@@ -1138,7 +1138,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1166,7 +1166,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1192,7 +1192,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1206,7 +1206,7 @@ BEGIN
 		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
 		WHERE EV.FechaEvaluacion = @FechaEvaluacion
 END
--- EXEC USP_GET_TEST_BY_DATE ''
+-- EXEC USP_GET_TEST_BY_DATE '2023-01-01'
 GO
 
 
@@ -1220,7 +1220,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1234,7 +1234,7 @@ BEGIN
 		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
 		WHERE CAP.Nombre = @Nombre
 END
--- EXEC USP_GET_TESTS_BY_COURSE_NAME 
+-- EXEC USP_GET_TESTS_BY_COURSE_NAME 'Algoritmos y Estructura de Datos'
 GO
 
 
@@ -1248,7 +1248,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1260,11 +1260,13 @@ BEGIN
         INNER JOIN TblCapacitaciones CAP ON EV.IdCapacitacion = CAP.IdCapacitacion
 		INNER JOIN TblCargo CAR ON EMP.IdCargo = CAR.IdCargo
 		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
-		WHERE CAP.Nombre = @NombreCompleto
+		WHERE EMP.NombreCompleto = @NombreCompleto
 END
--- EXEC USP_GET_TEST_BY_EMPLOYEE_NAME 
+-- EXEC USP_GET_TEST_BY_EMPLOYEE_NAME 'Luis Méndez Paredes'
 GO
  
+exec dbo.USP_GET_ALL_TESTS
+
 
 
 CREATE OR ALTER PROC USP_GET_TEST_BY_GRADE
@@ -1276,7 +1278,7 @@ BEGIN
 		CAP.Nombre AS Curso_de_la_Evaluación,
 		EMP.IdEmpleado,
         EMP.NombreCompleto,
-		CAR.Titulo,
+		CAR.Titulo AS Cargo,
 		DEP.NombreDepartamento,
 		DEP.Ubicacion,
 		EV.Calificacion,
@@ -1290,10 +1292,79 @@ BEGIN
 		INNER JOIN TblDepartamento DEP ON EMP.IdDepartamento = DEP.IdDepartamento
 		WHERE EV.Calificacion = @Calificacion
 END
--- EXEC USP_GET_TEST_BY_GRADE 1
+-- EXEC USP_GET_TEST_BY_GRADE 15
 GO
 
-select * from TblEvaluacion
+
+
+CREATE OR ALTER PROC USP_INSERT_EVALUACION
+    @IdEmpleado INT,
+	@IdCapacitacion INT,
+    @FechaEvaluacion DATE,
+    @FechaFinalizacion DATE,
+    @IdEstadoEvaluacion INT,
+    @Calificacion INT,
+    @Comentarios TEXT
+AS
+BEGIN
+    INSERT INTO TblEvaluacion 
+    (IdEmpleado, IdCapacitacion, FechaEvaluacion, FechaFinalizacion, IdEstadoEvaluacion, Calificacion, Comentarios)
+    VALUES 
+    (@IdEmpleado, @IdCapacitacion, @FechaEvaluacion, @FechaFinalizacion, @IdEstadoEvaluacion, @Calificacion, @Comentarios)
+END
+GO
+
+-- Ejemplo de ejecución
+-- EXEC USP_INSERT_EVALUACION 2, 2, '2023-01-01', '2023-02-01', 2, 13, 'hola coco';
+
+
+select * from TblEvaluacion  
+
+select * from TblEmpleado  
+
+
+
+-- USP_UPDATE_EVALUACION (actualizado)
+CREATE OR ALTER PROC USP_UPDATE_EVALUACION
+	@IdEvaluacion int,
+    @IdEmpleado INT,
+	@IdCapacitacion INT,
+    @FechaEvaluacion DATE,
+    @FechaFinalizacion DATE,
+    @IdEstadoEvaluacion INT,
+    @Calificacion INT,
+    @Comentarios TEXT
+AS
+BEGIN
+    
+	update TblEvaluacion
+	set IdEmpleado = @IdEmpleado,
+	 IdCapacitacion = @IdCapacitacion,
+	 FechaEvaluacion = @FechaEvaluacion,
+	 FechaFinalizacion = @FechaFinalizacion,
+	 IdEstadoEvaluacion = @IdEstadoEvaluacion,
+	 Calificacion = @Calificacion,
+	 Comentarios = @Comentarios
+	where IdEvaluacion = @IdEvaluacion 
+END
+GO
+
+-- Ejemplo de ejecución
+-- EXEC USP_UPDATE_EVALUACION 1, 1, 1, '2023-01-01', '2023-02-01', 3, 15, 'hola coco1';
+
+
+
+
+-- USP_DELETE_EVALUACION
+CREATE OR ALTER PROC USP_DELETE_EVALUACION
+	@IdEvaluacion int
+AS
+BEGIN
+	DELETE FROM TblEvaluacion
+	WHERE IdEvaluacion = @IdEvaluacion
+END
+-- EXEC USP_DELETE_EMPLEADO 1
+GO
 
 
 
@@ -1307,34 +1378,108 @@ BEGIN
 		A.IdAsistencia,
 		A.IdEmpleado,
 		E.NombreCompleto,
-		E.DNI,
+		E.IdTipoDocumento,
+		E.NumeroDocumento,
 		E.IdCargo,
 		E.IdDepartamento,
-		A.Fecha,
 		A.HoraEntrada,
 		A.HoraSalida
 	FROM TblAsistencia A
 	JOIN TblEmpleado E ON A.IdEmpleado = E.IdEmpleado
-	ORDER BY A.Fecha DESC
+	ORDER BY A.HoraEntrada DESC
 END
 GO
 
 exec dbo.USP_SELECT_ASISTENCIAS
 
 
+CREATE OR ALTER PROC USP_GET_ASISTENCIA_BY_EMPLOYEE_NAME
+ @NombreCompleto VARCHAR(100)
+AS
+BEGIN
+	SELECT 
+		A.IdAsistencia,
+		A.IdEmpleado,
+		E.NombreCompleto,
+		E.IdTipoDocumento,
+		E.NumeroDocumento,
+		E.IdCargo,
+		E.IdDepartamento,
+		A.HoraEntrada,
+		A.HoraSalida
+	FROM TblAsistencia A
+	JOIN TblEmpleado E ON A.IdEmpleado = E.IdEmpleado
+	WHERE E.NombreCompleto = @NombreCompleto
+END
+-- EXEC USP_GET_ASISTENCIA_BY_EMPLOYEE_NAME 'Andrea Torres Vega'
+GO
+
+
+CREATE OR ALTER PROC USP_GET_ASISTENCIA_BY_DOCUMENT_NUMBER
+ @NumeroDocumento int
+AS
+BEGIN
+	SELECT 
+		A.IdAsistencia,
+		A.IdEmpleado,
+		E.NombreCompleto,
+		E.IdTipoDocumento,
+		E.NumeroDocumento,
+		E.IdCargo,
+		E.IdDepartamento,
+		A.HoraEntrada,
+		A.HoraSalida
+	FROM TblAsistencia A
+	JOIN TblEmpleado E ON A.IdEmpleado = E.IdEmpleado
+	WHERE E.NumeroDocumento = @NumeroDocumento
+END
+-- EXEC USP_GET_ASISTENCIA_BY_DOCUMENT_NUMBER 12345678
+GO
+
+
+CREATE OR ALTER PROC USP_GET_ASISTENCIA_BY_DATE
+ @HoraEntrada date
+AS
+BEGIN
+	SELECT 
+		A.IdAsistencia,
+		A.IdEmpleado,
+		E.NombreCompleto,
+		E.IdTipoDocumento,
+		E.NumeroDocumento,
+		E.IdCargo,
+		E.IdDepartamento,
+		A.HoraEntrada,
+		A.HoraSalida
+	FROM TblAsistencia A
+	JOIN TblEmpleado E ON A.IdEmpleado = E.IdEmpleado
+	WHERE A.HoraEntrada = @HoraEntrada
+END
+-- EXEC USP_GET_ASISTENCIA_BY_DATE '2025-09-17'
+GO
+
+
+
 
 -- INSERT Asistencia
 CREATE OR ALTER PROC USP_INSERT_ASISTENCIA
 	@IdEmpleado INT,
-	@Fecha DATE,
 	@HoraEntrada TIME,
 	@HoraSalida TIME
 AS
 BEGIN
-	INSERT INTO TblAsistencia (IdEmpleado, Fecha, HoraEntrada, HoraSalida)
-	VALUES (@IdEmpleado, @Fecha, @HoraEntrada, @HoraSalida)
+	INSERT INTO TblAsistencia (IdEmpleado, HoraEntrada, HoraSalida)
+	VALUES (@IdEmpleado, @HoraEntrada, @HoraSalida)
 END
 GO
+
+EXEC dbo.USP_INSERT_ASISTENCIA 
+    @IdEmpleado = 1,
+    @HoraEntrada = '2025-09-17 08:00:00',
+    @HoraSalida = '2025-09-17 17:00:00';
+
+
+
 
 
 
@@ -1342,20 +1487,17 @@ GO
 CREATE OR ALTER PROC USP_UPDATE_ASISTENCIA
 	@IdAsistencia INT,
 	@IdEmpleado INT,
-	@Fecha DATE,
 	@HoraEntrada TIME,
 	@HoraSalida TIME
 AS
 BEGIN
 	UPDATE TblAsistencia
 	SET IdEmpleado = @IdEmpleado,
-		Fecha = @Fecha,
 		HoraEntrada = @HoraEntrada,
 		HoraSalida = @HoraSalida
 	WHERE IdAsistencia = @IdAsistencia
 END
 GO
-
 
 
 -- DELETE Asistencia
@@ -1366,6 +1508,142 @@ BEGIN
 	DELETE FROM TblAsistencia WHERE IdAsistencia = @IdAsistencia
 END
 GO
+
+
+exec dbo.USP_DELETE_ASISTENCIA 2
+
+
+
+-- usuarios 
+
+
+-- SELECT ALL USUARIOS
+CREATE OR ALTER PROC USP_GET_ALL_USUARIOS
+AS
+BEGIN
+	SELECT 
+		U.IdUsuario,
+		U.Usuario,
+		U.Rol,
+		E.IdEmpleado
+	FROM TblUsuario U
+	JOIN TblEmpleado E ON U.IdEmpleado = E.IdEmpleado
+	ORDER BY U.Usuario
+END
+GO
+ 
+exec dbo.USP_GET_ALL_USUARIOS
+
+select * from dbo.TblUsuario  
+
+
+
+
+-- INSERT USUARIO
+CREATE OR ALTER PROC USP_INSERT_USUARIO
+	@Usuario VARCHAR(50),
+	@Contrasena varbinary(64),
+	@Rol VARCHAR(50),
+	@IdEmpleado INT
+AS
+BEGIN
+	INSERT INTO TblUsuario (Usuario, Contrasena, Rol, IdEmpleado)
+	VALUES (@Usuario, @Contrasena, @Rol, @IdEmpleado)
+END
+GO
+
+
+
+-- UPDATE USUARIO
+CREATE OR ALTER PROC USP_UPDATE_USUARIO
+	@IdUsuario INT,
+	@Usuario VARCHAR(50),
+	@Contrasena varbinary(64),
+	@Rol VARCHAR(50),
+	@IdEmpleado INT
+AS
+BEGIN
+	UPDATE TblUsuario
+	SET 
+		Usuario = @Usuario,
+		Contrasena = @Contrasena,
+		Rol = @Rol,
+		IdEmpleado = @IdEmpleado
+	WHERE IdUsuario = @IdUsuario
+END
+GO
+
+
+
+
+
+-- DELETE USUARIO
+CREATE OR ALTER PROC USP_DELETE_USUARIO
+	@IdUsuario INT
+AS
+BEGIN
+	DELETE FROM TblUsuario
+	WHERE IdUsuario = @IdUsuario
+END
+GO
+
+
+
+
+
+
+
+
+
+
+--  login de usuarios
+
+CREATE or alter PROCEDURE sp_LoginUsuario
+    @Usuario VARCHAR(50),
+    @Contrasena VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Validar si el usuario existe
+    IF NOT EXISTS (SELECT 1 FROM TblUsuario WHERE Usuario = @Usuario)
+    BEGIN
+        RAISERROR('El usuario no existe.', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @HashedInputPassword VARBINARY(64);
+    SET @HashedInputPassword = HASHBYTES('SHA2_256', CONVERT(VARCHAR(255), @Contrasena));
+
+    DECLARE @StoredPassword VARBINARY(64);
+    DECLARE @Rol VARCHAR(50);
+    DECLARE @IdUsuario INT;
+
+    SELECT 
+        @StoredPassword = Contrasena,
+        @Rol = Rol,
+        @IdUsuario = IdUsuario
+    FROM TblUsuario
+    WHERE Usuario = @Usuario;
+
+    -- Comparar hashes
+    IF @StoredPassword <> @HashedInputPassword
+    BEGIN
+        RAISERROR('Contraseña incorrecta.', 16, 1);
+        RETURN;
+    END
+
+    -- Éxito: devolver info útil al frontend
+    SELECT 
+        @IdUsuario AS IdUsuario,
+        @Usuario AS Usuario,
+        @Rol AS Rol,
+        'Login exitoso' AS Mensaje;
+END
+GO
+
+
+
 
 
 
@@ -1536,127 +1814,3 @@ GO
 
 
 
--- usuarios 
-
-
--- SELECT ALL USUARIOS
-CREATE OR ALTER PROC USP_GET_ALL_USUARIOS
-AS
-BEGIN
-	SELECT 
-		U.IdUsuario,
-		U.Usuario,
-		U.Rol,
-		E.IdEmpleado
-	FROM TblUsuario U
-	JOIN TblEmpleado E ON U.IdEmpleado = E.IdEmpleado
-	ORDER BY U.Usuario
-END
-GO
- 
-exec dbo.USP_GET_ALL_USUARIOS
-
-select * from dbo.TblUsuario  
-
--- INSERT USUARIO
-CREATE OR ALTER PROC USP_INSERT_USUARIO
-	@Usuario VARCHAR(50),
-	@Contrasena varbinary(64),
-	@Rol VARCHAR(50),
-	@IdEmpleado INT
-AS
-BEGIN
-	INSERT INTO TblUsuario (Usuario, Contrasena, Rol, IdEmpleado)
-	VALUES (@Usuario, @Contrasena, @Rol, @IdEmpleado)
-END
-GO
-
-
-
--- UPDATE USUARIO
-CREATE OR ALTER PROC USP_UPDATE_USUARIO
-	@IdUsuario INT,
-	@Usuario VARCHAR(50),
-	@Contrasena varbinary(64),
-	@Rol VARCHAR(50),
-	@IdEmpleado INT
-AS
-BEGIN
-	UPDATE TblUsuario
-	SET 
-		Usuario = @Usuario,
-		Contrasena = @Contrasena,
-		Rol = @Rol,
-		IdEmpleado = @IdEmpleado
-	WHERE IdUsuario = @IdUsuario
-END
-GO
-
-
-
-
-
--- DELETE USUARIO
-CREATE OR ALTER PROC USP_DELETE_USUARIO
-	@IdUsuario INT
-AS
-BEGIN
-	DELETE FROM TblUsuario
-	WHERE IdUsuario = @IdUsuario
-END
-GO
-
-
-
-
-
-
-
-
-
-
---  login de usuarios
-
-CREATE or alter PROCEDURE sp_LoginUsuario
-    @Usuario VARCHAR(50),
-    @Contrasena VARCHAR(255)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Validar si el usuario existe
-    IF NOT EXISTS (SELECT 1 FROM TblUsuario WHERE Usuario = @Usuario)
-    BEGIN
-        RAISERROR('El usuario no existe.', 16, 1);
-        RETURN;
-    END
-
-    DECLARE @HashedInputPassword VARBINARY(64);
-    SET @HashedInputPassword = HASHBYTES('SHA2_256', CONVERT(VARCHAR(255), @Contrasena));
-
-    DECLARE @StoredPassword VARBINARY(64);
-    DECLARE @Rol VARCHAR(50);
-    DECLARE @IdUsuario INT;
-
-    SELECT 
-        @StoredPassword = Contrasena,
-        @Rol = Rol,
-        @IdUsuario = IdUsuario
-    FROM TblUsuario
-    WHERE Usuario = @Usuario;
-
-    -- Comparar hashes
-    IF @StoredPassword <> @HashedInputPassword
-    BEGIN
-        RAISERROR('Contraseña incorrecta.', 16, 1);
-        RETURN;
-    END
-
-    -- Éxito: devolver info útil al frontend
-    SELECT 
-        @IdUsuario AS IdUsuario,
-        @Usuario AS Usuario,
-        @Rol AS Rol,
-        'Login exitoso' AS Mensaje;
-END
-GO

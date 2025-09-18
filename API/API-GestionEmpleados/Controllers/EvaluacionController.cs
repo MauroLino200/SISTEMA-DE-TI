@@ -42,7 +42,7 @@ namespace API_GestionEmpleados.Controllers
                 var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionPorIdAsync(idCapacitacion);
                 if (evaluaciones == null)
                 {
-                    return NotFound($"Empleado with ID {idCapacitacion} not found.");
+                    return NotFound($"Empleado with ID '{idCapacitacion}' not found.");
                 }
                 return Ok(evaluaciones);
             }
@@ -61,7 +61,7 @@ namespace API_GestionEmpleados.Controllers
                 var empleados = await _evaluacionRepository.ObtenerEvaluacionesPorEmpleadoAsync(idEmpleado);
                 if (empleados == null)
                 {
-                    return NotFound($"Empleado with ID {idEmpleado} not found.");
+                    return NotFound($"Empleado with ID '{idEmpleado}' not found.");
                 }
                 return Ok(empleados);
             }
@@ -80,7 +80,7 @@ namespace API_GestionEmpleados.Controllers
                 var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorFechanAsync(fecha);
                 if (evaluaciones == null || !evaluaciones.Any())
                 {
-                    return NotFound($"No se encontraron evaluaciones para la fecha {fecha:yyyy-MM-dd}.");
+                    return NotFound($"No se encontraron evaluaciones para la fecha '{fecha:yyyy-MM-dd}'.");
                 }
                 return Ok(evaluaciones);
             }
@@ -119,7 +119,7 @@ namespace API_GestionEmpleados.Controllers
                 var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorNombreEmpleadoAsync(nom_completo);
                 if (evaluaciones == null || !evaluaciones.Any())
                 {
-                    return NotFound($"No se encontraron evaluaciones para el empleado {nom_completo}.");
+                    return NotFound($"No se encontraron evaluaciones para el empleado '{nom_completo}'.");
                 }
                 return Ok(evaluaciones);
             }
@@ -139,7 +139,7 @@ namespace API_GestionEmpleados.Controllers
                 var evaluaciones = await _evaluacionRepository.ObtenerEvaluacionesPorNotaAsync(calificacion);
                 if (evaluaciones == null || !evaluaciones.Any())
                 {
-                    return NotFound($"No se encontraron evaluaciones para la fecha {calificacion}.");
+                    return NotFound($"No se encontraron evaluaciones con la nota '{calificacion}'.");
                 }
                 return Ok(evaluaciones);
             }

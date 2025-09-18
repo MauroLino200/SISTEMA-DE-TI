@@ -90,7 +90,7 @@ namespace API_GestionEmpleados.Repositories
         {
             var sp = "USP_GET_TEST_BY_DATE";
             var parameters = new DynamicParameters();
-            parameters.Add("@FechaEvaluacion", fecha, DbType.Int32);
+            parameters.Add("@FechaEvaluacion", fecha, DbType.DateTime);
 
             try
             {
@@ -110,7 +110,6 @@ namespace API_GestionEmpleados.Repositories
             }
         }
 
-        
         public async Task<IEnumerable<EvaluacionResponse>> ObtenerEvaluacionesPorNombreCursoAsync(string nom_curso)
         {
             var sp = "USP_GET_TESTS_BY_COURSE_NAME";
@@ -193,7 +192,7 @@ namespace API_GestionEmpleados.Repositories
             parameters.Add("@IdCapacitacion", evaluacion.IdCapacitacion, DbType.Int32);
             parameters.Add("@FechaEvaluacion", evaluacion.FechaEvaluacion, DbType.DateTime);
             parameters.Add("@FechaFinalizacion", evaluacion.FechaFinalizacion, DbType.DateTime);
-            parameters.Add("@Estado", evaluacion.Estado, DbType.Boolean);
+            parameters.Add("@IdEstadoEvaluacion", evaluacion.IdEstadoEvaluacion, DbType.Int32);
             parameters.Add("@Calificacion", evaluacion.Calificacion, DbType.Int32);
             parameters.Add("@Comentarios", evaluacion.Comentarios, DbType.String);
 
@@ -221,7 +220,7 @@ namespace API_GestionEmpleados.Repositories
             parameters.Add("@IdCapacitacion", evaluacion.IdCapacitacion, DbType.Int32);
             parameters.Add("@FechaEvaluacion", evaluacion.FechaEvaluacion, DbType.DateTime);
             parameters.Add("@FechaFinalizacion", evaluacion.FechaFinalizacion, DbType.DateTime);
-            parameters.Add("@Estado", evaluacion.Estado, DbType.String);
+            parameters.Add("@IdEstadoEvaluacion", evaluacion.IdEstadoEvaluacion, DbType.String);
             parameters.Add("@Calificacion", evaluacion.Calificacion, DbType.Int32);
             parameters.Add("@Comentarios", evaluacion.Comentarios, DbType.String);
 

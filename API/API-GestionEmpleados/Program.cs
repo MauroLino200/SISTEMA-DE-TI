@@ -17,6 +17,7 @@ builder.Services.AddScoped<IEvaluacionRepository, EvaluacionRepository>();
 builder.Services.AddScoped<IEquipoTrabajoRepository, EquipoTrabajoRepository>();
 builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
 builder.Services.AddScoped<IDevolucionesRepository, DevolucionesRepository>();
+builder.Services.AddScoped<IAsistenciasRepository, AsistenciasRepository>();
 
 
 builder.Services.AddControllers();
